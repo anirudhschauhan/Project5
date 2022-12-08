@@ -259,12 +259,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
 
 
-
-
-
     public void changePrice(){
         String priceString = df.format(pia.price());
-        priceTextView.setText(priceString);
+        priceTextView.setText("Price: $"+priceString);
     }
     public void changeCrust(){
         String crustString = pia.getCrust().toString();

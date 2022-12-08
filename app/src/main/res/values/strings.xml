@@ -15,9 +15,14 @@
     <string name="removePizzaButton">Remove Pizza</string>
     <string name="removeAllPizzaButton">Remove All Pizzas</string>
     <string name="placeOrderButton">Place Orders</string>
-    <string name="totalPriceView">Total Price:$</string>
-    <string name="salesTaxView">Sales Tax:$</string>
-    <string name="orderTotalView">Order Total:$</string>
+    <string name="totalPriceView">Total Price:</string>
+    <string name="salesTaxView">Sales Tax:</string>
+    <string name="orderTotalView">Order Total:</string>
     <string name="orderNumberView">Order Number:</string>
     <string name="shoppingCartView">Shopping Cart</string>
+    <string name="cancelOrderButton">Cancel Order</string>
+    <string name="exportOrderButton">Export Order</string>
+    <string name="storeOrderView">Store Order</string>
+    <string name="currentOrderView">Current Order</string>
+    <string name="NYView">NY Pizza</string>
 </resources>

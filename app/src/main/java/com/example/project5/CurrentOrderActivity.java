@@ -34,6 +34,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_current_order);
         order = MainActivity.getOrd();
         orderList = (ListView)findViewById(R.id.orderList);
@@ -43,6 +44,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
         orderNumberText = findViewById(R.id.orderNumberText);
         totalPriceText = findViewById(R.id.totalPriceText);
         salesTaxText = findViewById(R.id.salesTaxText);
+
         orderTotalText = findViewById(R.id.orderTotalText);
         orderList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         orderList.setAdapter(arrayAdapter);
@@ -97,30 +99,40 @@ public class CurrentOrderActivity extends AppCompatActivity {
     }
     public void removePizza(ArrayAdapter<String> arrayAdapter){
         if(pizzaInfo==null){
-
+            Toast.makeText(CurrentOrderActivity.this, "Cannot remove any pizzas", Toast.LENGTH_SHORT).show();
+            return;
         }
         pia = order.getOrders().get(pizzaPos);
 
         double tempPrice = removeTotal(pia.price());
         setTotalPriceText(tempPrice);
         setSalesTaxText(tempPrice);
-        setOrderTotalText(tempPrice);
+        tempNum = tempPrice + saleTaxPrice(tempPrice);
+        setOrderTotalText(tempNum);
         order.remove(order.getOrders().get(pizzaPos));
-
         pizzaList.remove(pizzaPos);
         arrayAdapter.notifyDataSetChanged();
 
     }
     public void removeAllPizzas(ArrayAdapter<String> arrayAdapter){
+        if(pizzaList== null){
+            Toast.makeText(CurrentOrderActivity.this, "Cannot remove pizzas", Toast.LENGTH_SHORT).show();
+        }
         order.getOrders().clear();
         pizzaList.clear();
+        setAllBlank();
         arrayAdapter.notifyDataSetChanged();
     }
     public void placeOrder(ArrayAdapter<String> arrayAdapter){
+        if(pizzaList==null){
+            Toast.makeText(CurrentOrderActivity.this, "Cannot order any pizzas if there are none", Toast.LENGTH_SHORT).show();
+            return;
+        }
         MainActivity.addStoreOrd(order);
         order.setTaxPrice(tempNum);
         MainActivity.resetOrder();
         pizzaList.clear();
+        setAllBlank();
         arrayAdapter.notifyDataSetChanged();
     }
     public void backButton(){openMainActivity();}
@@ -134,7 +146,7 @@ public class CurrentOrderActivity extends AppCompatActivity {
     }
     public void setTotalPriceText(double temper){
         String totalPriceString = df.format(temper);
-        totalPriceText.setText(totalPriceString);
+        totalPriceText.setText("$"+ totalPriceString);
     }
     public void setSalesTaxText(double temper){
         String taxString = df.format(saleTaxPrice(temper));
@@ -146,6 +158,11 @@ public class CurrentOrderActivity extends AppCompatActivity {
     }
     public void setOrderNumberText(){
         orderNumberText.setText("" + order.getOrderSerial());
+    }
+    public void setAllBlank(){
+        setTotalPriceText(STARTING_PRICE);
+        setSalesTaxText(STARTING_PRICE);
+        setOrderTotalText(STARTING_PRICE);
     }
 
     /**
