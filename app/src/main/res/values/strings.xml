@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Project5</string>
+    <string-array name="flavors">
+        <item>DELUXE</item>
+        <item>BBQCHICKEN</item>
+        <item>MEATZZA</item>
+        <item>BUILDYOUROWN</item>
+    </string-array>
+    <string name="smallRadioLabel">SMALL</string>
+    <string name="mediumRadioLabel">MEDIUM</string>
+    <string name="largeRadioLabel">LARGE</string>
+    <string name="addToOrderButton">ADD TO ORDER</string>
+    <string name="chicagoPizzaView">Chicago Pizza</string>
+    <string name="backButtonName">Back</string>
+    <string name="removePizzaButton">Remove Pizza</string>
+    <string name="removeAllPizzaButton">Remove All Pizzas</string>
+    <string name="placeOrderButton">Place Orders</string>
+    <string name="totalPriceView">Total Price:$</string>
+    <string name="salesTaxView">Sales Tax:$</string>
+    <string name="orderTotalView">Order Total:$</string>
+    <string name="orderNumberView">Order Number:</string>
+    <string name="shoppingCartView">Shopping Cart</string>
+</resources>
