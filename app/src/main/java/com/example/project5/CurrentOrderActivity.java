@@ -66,6 +66,10 @@ public class CurrentOrderActivity extends AppCompatActivity {
         setOrderNumberText();
         makeButtons(arrayAdapter);
     }
+
+    /**
+     * creates a list of pizzas that are currently in the order
+     */
     public void createPizzaList(){
         if(order!=null){
             for(Pizza za: order.getOrders()){
@@ -73,6 +77,11 @@ public class CurrentOrderActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * creates buttons to be clicked on
+     * @param arrayAdapter
+     */
     public void makeButtons(ArrayAdapter<String> arrayAdapter) {
         backButton = (Button) findViewById(R.id.backCurrentButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +106,11 @@ public class CurrentOrderActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * removes pizza from the current order
+     * @param arrayAdapter
+     */
     public void removePizza(ArrayAdapter<String> arrayAdapter){
         if(pizzaInfo==null){
             Toast.makeText(CurrentOrderActivity.this, "Cannot remove any pizzas", Toast.LENGTH_SHORT).show();
@@ -114,6 +128,11 @@ public class CurrentOrderActivity extends AppCompatActivity {
         arrayAdapter.notifyDataSetChanged();
 
     }
+
+    /**
+     * removes ALL pizzas from the current order
+     * @param arrayAdapter
+     */
     public void removeAllPizzas(ArrayAdapter<String> arrayAdapter){
         if(pizzaList== null){
             Toast.makeText(CurrentOrderActivity.this, "Cannot remove pizzas", Toast.LENGTH_SHORT).show();
@@ -123,6 +142,12 @@ public class CurrentOrderActivity extends AppCompatActivity {
         setAllBlank();
         arrayAdapter.notifyDataSetChanged();
     }
+
+    /**
+     * places the order to the store containing pizzas
+     * to be made
+     * @param arrayAdapter
+     */
     public void placeOrder(ArrayAdapter<String> arrayAdapter){
         if(pizzaList==null){
             Toast.makeText(CurrentOrderActivity.this, "Cannot order any pizzas if there are none", Toast.LENGTH_SHORT).show();
@@ -135,23 +160,54 @@ public class CurrentOrderActivity extends AppCompatActivity {
         setAllBlank();
         arrayAdapter.notifyDataSetChanged();
     }
-    public void backButton(){openMainActivity();}
+
+    /**
+     * back button for the program, returns to main menu
+     */
+    public void backButton(){
+        openMainActivity();
+    }
+
+    /**
+     * opens the main menu
+     */
     public void openMainActivity(){
         Intent intent = new Intent(CurrentOrderActivity.this, MainActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * displays the total price of the current order
+     * @param price
+     * @return
+     */
     public double totalPrice(double price){
         total += price;
         return total;
     }
+
+    /**
+     * sets the price of the current order
+     * @param temper
+     */
     public void setTotalPriceText(double temper){
         String totalPriceString = df.format(temper);
         totalPriceText.setText("$"+ totalPriceString);
     }
+
+    /**
+     * sets the sales tax of the current order
+     * @param temper
+     */
     public void setSalesTaxText(double temper){
         String taxString = df.format(saleTaxPrice(temper));
         salesTaxText.setText("$" + taxString);
     }
+
+    /**
+     * sets the total price of the current order
+     * @param temper
+     */
     public void setOrderTotalText(double temper){
         String orderString = df.format(temper);
         orderTotalText.setText("$" + orderString);
@@ -159,6 +215,11 @@ public class CurrentOrderActivity extends AppCompatActivity {
     public void setOrderNumberText(){
         orderNumberText.setText("" + order.getOrderSerial());
     }
+
+    /**
+     * sets the total price of pizzas, sales tax,
+     * and order total cost to blanks
+     */
     public void setAllBlank(){
         setTotalPriceText(STARTING_PRICE);
         setSalesTaxText(STARTING_PRICE);
@@ -184,6 +245,12 @@ public class CurrentOrderActivity extends AppCompatActivity {
         total -= price;
         return total;
     }
+
+    /**
+     * returns the pizza and its toppings in a string format
+     * @param pia
+     * @return
+     */
     public String toString(Pizza pia) {
         String str;
         String type="";

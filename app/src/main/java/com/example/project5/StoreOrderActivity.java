@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * activity interface for the store orders
+ * @author Anirudh Chauhan, Matthew Calora
+ */
+
 public class StoreOrderActivity extends AppCompatActivity {
 
     @Override
