@@ -9,6 +9,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+/**
+ * class that adapts the topping recycler to android
+ * @author Anirudh Chauhan, Matthew Calora
+ */
 
 public class ToppingRecyclerAdapter extends RecyclerView.Adapter<ToppingRecyclerAdapter.ToppingViewHolder> {
     private ArrayList<ToppingRecycler> mToppingList;
@@ -38,24 +42,40 @@ public class ToppingRecyclerAdapter extends RecyclerView.Adapter<ToppingRecycler
         }
 
     }
+
+    /**
+     * creates a constructor to initalize the topping list
+     * @param toppingList
+     */
     public ToppingRecyclerAdapter(ArrayList<ToppingRecycler> toppingList){
         mToppingList = toppingList;
     }
-
-
+    /**
+     * returns the topping view holder
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public ToppingViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.toppingsrecycler, parent, false);
         ToppingViewHolder tvh = new ToppingViewHolder(v,mListener);
         return tvh;
     }
-
+    /**
+     * binds item and text
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ToppingViewHolder holder, int position) {
         ToppingRecycler currentItem =  mToppingList.get(position);
         holder.mTextView.setText(currentItem.getText());
     }
-
+    /**
+     * returns the number of toppings on the pizza
+     * @return
+     */
     @Override
     public int getItemCount() {
         return mToppingList.size();

@@ -25,7 +25,7 @@
         android:layout_width="118dp"
         android:layout_height="70dp"
         android:layout_marginStart="52dp"
-        android:text="Chicago Style"
+        android:text="@string/chicagoPizzaView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -118,14 +118,14 @@
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Current Order" />
+                android:text="@string/currentOrderView" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/storeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Store Order" />
+                android:text="@string/storeOrderView" />
         </LinearLayout>
 
     </LinearLayout>
@@ -136,7 +136,7 @@
         android:layout_height="70dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="4dp"
-        android:text="NY STYLE"
+        android:text="@string/NYView"
         app:layout_constraintStart_toEndOf="@+id/chicagobutton"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 

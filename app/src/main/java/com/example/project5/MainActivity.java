@@ -11,9 +11,12 @@ import android.widget.QuickContactBadge;
 
 import java.util.ArrayList;
 
-//commented out something in order controller
+/**
+ * activity interface for creating pizzas and purchasing them
+ * @author Anirudh Chauhan, Matthew Calora
+ */
 public class MainActivity extends AppCompatActivity {
-    private Button button, button2;
+    private Button button, button2, button3;
 
     private static ArrayList<Integer> orderNumArrayList= new ArrayList<>();
     private static StoreOrders storeOrd= new StoreOrders();;
@@ -34,14 +37,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {openCurrentActivity();}
         });
-
+        button3 = (Button) findViewById(R.id.storeButton);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {openStoreActivity();}
+        });
     }
+    /**
+     * opens the chicago pizza activity interface
+     */
     public void openChicagoActivity(){
         Intent intent = new Intent(this, ChicagoActivity.class);
         startActivity(intent);
     }
+    /**
+     * opens the current pizza activity interface
+     */
     public void openCurrentActivity(){
         Intent intent = new Intent(this, CurrentOrderActivity.class);
+        startActivity(intent);
+    }
+    /**
+     * opens the store order activity interface
+     */
+    public void openStoreActivity(){
+        Intent intent = new Intent(this, StoreOrderActivity.class);
         startActivity(intent);
     }
     /**

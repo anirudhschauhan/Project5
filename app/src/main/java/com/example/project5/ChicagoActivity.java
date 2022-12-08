@@ -20,6 +20,10 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+/**
+ * activity interface for the chicago pizzas
+ * @author Anirudh Chauhan, Matthew Calora
+ */
 
 public class ChicagoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private RecyclerView mRecyclerView, addedRecyclerView;
@@ -67,6 +71,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
         changeCrust();
     }
+    /**
+     * makes recyclers for the options
+     */
     public void makeRecyclers(){
         mRecyclerView = findViewById(R.id.toppingRecycler);
         mRecyclerView.setHasFixedSize(true);
@@ -103,6 +110,10 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             }
         });
     }
+
+    /**
+     * creates buttons to be clicked on
+     */
     public void makeButtons(){
         backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener(){
@@ -115,10 +126,18 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             public void onClick(View view) {addToOrder();}
         });
     }
+    /**
+     * the "back" button for the program. returns to the main menu
+     */
     public void backButton(){
         openMainActivity();
 
     }
+    /**
+     * adds topping to pizza
+     * @param position
+     * @return
+     */
     public boolean addTopping(int position){
         try{
             ToppingRecycler selectedRecycler = toppingRecyclerList.get(position);
@@ -139,8 +158,12 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         catch (Exception e) {
             return false;
         }
-
     }
+    /**
+     * removes topping from pizza
+     * @param position
+     * @return
+     */
     public boolean removeTopping(int position){
         try{
             ToppingRecycler selectedRecycler = addedToppingRecyclerList.get(position);
@@ -161,7 +184,13 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             return false;
         }
     }
-
+    /**
+     * creates a pizza given the flavor
+     * @param parent
+     * @param view
+     * @param pos
+     * @param l
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long l) {
         String flav = parent.getItemAtPosition(pos).toString();
@@ -198,7 +227,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-
+    /**
+     * changes the size of the pizza
+     */
     public void changeSize(){
 
        int radioId = sizeGroup.getCheckedRadioButtonId();
@@ -219,7 +250,10 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
 
 
     }
-
+    /**
+     * alters the size of the pizza on the view
+     * @param view
+     */
     public void alterSize(View view){
         int radioId = sizeGroup.getCheckedRadioButtonId();
         sizeSetter = findViewById(radioId);
@@ -235,6 +269,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
           changePrice();
 
     }
+    /**
+     * adds the pizza to the order
+     */
     public void addToOrder(){
         addingOrderAlert = new AlertDialog.Builder(ChicagoActivity.this);
         addingOrderAlert.setTitle("ORDER")
@@ -256,18 +293,24 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
                 .show();
 
     }
-
-
-
+    /**
+     * changes the price of the order
+     */
     public void changePrice(){
         String priceString = df.format(pia.price());
         priceTextView.setText("Price: $"+priceString);
     }
+    /**
+     * changes the crust of the pizza
+     */
     public void changeCrust(){
         String crustString = pia.getCrust().toString();
         crustTextView.setText("CRUST: " + crustString);
 
     }
+    /**
+     * opens the main activity interface / main menu
+     */
     public void openMainActivity(){
         Intent intent = new Intent(ChicagoActivity.this, MainActivity.class);
         startActivity(intent);
