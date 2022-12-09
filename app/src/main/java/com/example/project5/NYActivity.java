@@ -21,11 +21,11 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 /**
- * activity interface for the chicago pizzas
+ * activity interface for the new york pizzas
  * @author Anirudh Chauhan, Matthew Calora
  */
 
-public class ChicagoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NYActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private RecyclerView mRecyclerView, addedRecyclerView;
     private ToppingRecyclerAdapter mAdapter, addedAdapter;
     private RecyclerView.LayoutManager mLayoutManager, addedLayoutManager;
@@ -47,23 +47,22 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        piza = new ChicagoPizza();
+        piza = new NYPizza();
         pia = piza.createDeluxe();
         pia.setSize(Size.valueOf("SMALL"));
         addTop=false;
         removTop=false;
-        setContentView(R.layout.activity_chicago);
-        Spinner spinner = findViewById(R.id.flavorLabel);
-        sizeGroup = findViewById(R.id.sizeGroup);
-        priceTextView = findViewById(R.id.priceTextView);
-        crustTextView = findViewById(R.id.crustTextView);
+        setContentView(R.layout.activity_nyactivity);
+        Spinner spinner = findViewById(R.id.NYflavorLabel);
+        sizeGroup = findViewById(R.id.NYsizeGroup);
+        priceTextView = findViewById(R.id.NYpriceTextView);
+        crustTextView = findViewById(R.id.NYcrustTextView);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.flavors, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         toppingRecyclerList = new ArrayList<>();
         addedToppingRecyclerList = new ArrayList<>();
-
         for (Topping t : Topping.values()){
             toppingRecyclerList.add(new ToppingRecycler(t.toString()));
         }
@@ -72,14 +71,13 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             addedToppingRecyclerList.add(new ToppingRecycler(t.toString()));
         }
         makeButtons();
-
         changeCrust();
     }
     /**
      * makes recyclers for the options
      */
     public void makeRecyclers(){
-        mRecyclerView = findViewById(R.id.toppingRecycler);
+        mRecyclerView = findViewById(R.id.NYtoppingRecycler);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ToppingRecyclerAdapter(toppingRecyclerList);
@@ -92,11 +90,11 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
                     addTopping(position);
                 }
                 else{
-                    Toast.makeText(ChicagoActivity.this, "Cannot add any more toppings", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NYActivity.this, "Cannot add any more toppings", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        addedRecyclerView = findViewById(R.id.addedToppingRecycler);
+        addedRecyclerView = findViewById(R.id.NYaddedToppingRecycler);
         addedRecyclerView.setHasFixedSize(true);
         addedLayoutManager = new LinearLayoutManager(this);
         addedAdapter = new ToppingRecyclerAdapter(addedToppingRecyclerList);
@@ -109,7 +107,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
                     removeTopping(position);
                 }
                 else{
-                    Toast.makeText(ChicagoActivity.this, "Cannot remove any toppings", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NYActivity.this, "Cannot remove any toppings", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -119,12 +117,12 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
      * creates buttons to be clicked on
      */
     public void makeButtons(){
-        backButton = (Button) findViewById(R.id.backButton);
+        backButton = (Button) findViewById(R.id.NYbackButton);
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {backButton();}
         });
-        addOrderButton = (Button) findViewById(R.id.addOrderButton);
+        addOrderButton = (Button) findViewById(R.id.NYaddOrderButton);
         addOrderButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {addToOrder();}
@@ -181,7 +179,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             if (pia.getToppingList().size() < MAX_TOPPINGS) {
                 addTop = true;
             }
-           changePrice();
+            changePrice();
             return true;
         }
         catch (Exception e) {
@@ -218,7 +216,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
             addTop=true;
             removTop=true;
         }
-       addedToppingRecyclerList.clear();
+        addedToppingRecyclerList.clear();
         for(Topping t : pia.getToppingList()){
             addedToppingRecyclerList.add(new ToppingRecycler(t.toString()));
         }
@@ -236,9 +234,9 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
      */
     public void changeSize(){
 
-       int radioId = sizeGroup.getCheckedRadioButtonId();
+        int radioId = sizeGroup.getCheckedRadioButtonId();
 
-       sizeSetter = findViewById(radioId);
+        sizeSetter = findViewById(radioId);
 
         if (sizeSetter.getText().equals("SMALL")){
             pia.setSize(Size.valueOf("SMALL"));
@@ -270,14 +268,14 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
         if (sizeSetter.getText().equals("LARGE")){
             pia.setSize(Size.valueOf("LARGE"));
         }
-          changePrice();
+        changePrice();
 
     }
     /**
      * adds the pizza to the order
      */
     public void addToOrder(){
-        addingOrderAlert = new AlertDialog.Builder(ChicagoActivity.this);
+        addingOrderAlert = new AlertDialog.Builder(NYActivity.this);
         addingOrderAlert.setTitle("ORDER")
                 .setMessage("The pizza will be added to the order. Continue?")
                 .setCancelable(true)
@@ -291,7 +289,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(ChicagoActivity.this, "Pizza was not added to the order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NYActivity.this, "Pizza was not added to the order", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();
@@ -316,7 +314,7 @@ public class ChicagoActivity extends AppCompatActivity implements AdapterView.On
      * opens the main activity interface / main menu
      */
     public void openMainActivity(){
-        Intent intent = new Intent(ChicagoActivity.this, MainActivity.class);
+        Intent intent = new Intent(NYActivity.this, MainActivity.class);
         startActivity(intent);
     }
 

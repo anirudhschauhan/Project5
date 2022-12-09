@@ -16,11 +16,15 @@ import java.util.ArrayList;
  * @author Anirudh Chauhan, Matthew Calora
  */
 public class MainActivity extends AppCompatActivity {
-    private Button button, button2, button3;
+    private Button button, button2, button3, button4;
 
     private static ArrayList<Integer> orderNumArrayList= new ArrayList<>();
     private static StoreOrders storeOrd= new StoreOrders();;
-    private static Order ord = new Order();;
+    private static Order ord = new Order();
+    /**
+     * initializes the activity, and initializes all the items used later on
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {openStoreActivity();}
         });
+        button4 = (Button) findViewById(R.id.nyButton);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {openNYActivity();}
+        });
     }
     /**
      * opens the chicago pizza activity interface
@@ -62,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openStoreActivity(){
         Intent intent = new Intent(this, StoreOrderActivity.class);
+        startActivity(intent);
+    }
+    public void openNYActivity(){
+        Intent intent = new Intent(this, NYActivity.class);
         startActivity(intent);
     }
     /**

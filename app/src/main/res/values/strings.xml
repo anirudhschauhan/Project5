@@ -25,4 +25,5 @@
     <string name="storeOrderView">Store Order</string>
     <string name="currentOrderView">Current Order</string>
     <string name="NYView">NY Pizza</string>
+    <string name="ruPizzaria">RU Pizzaria</string>
 </resources>

@@ -33,7 +33,7 @@ public class StoreOrderActivity extends AppCompatActivity implements AdapterView
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
-     * creates the activity, and initializes all the items used later on
+     * initializes the activity, and initializes all the items used later on
      * @param savedInstanceState
      */
     @Override

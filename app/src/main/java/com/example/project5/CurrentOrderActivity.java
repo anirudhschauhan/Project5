@@ -31,6 +31,10 @@ public class CurrentOrderActivity extends AppCompatActivity {
     double total = STARTING_PRICE;
     private ArrayAdapter<String> arrayAdapter;
     private Pizza pia;
+    /**
+     * initializes the activity, and initializes all the items used later on
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
